@@ -48,6 +48,24 @@
   align-items: center;
 }
 
+.home main .button-wrapper {
+  position: absolute;
+  left: 70%;
+  top: 13%;
+
+  color: aliceblue;
+}
+
+.home main button {
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+  padding: 5px;
+
+  border: none;
+  border-radius: 10px;
+}
+
 .input-wrapper {
   width: 100vw;
 
@@ -75,7 +93,7 @@
 .cards-wrapper {
   width: 80%;
 
-  margin-top: 40px;
+  margin-top: 60px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

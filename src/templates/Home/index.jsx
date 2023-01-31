@@ -11,16 +11,43 @@ class Home extends Component {
 
   async componentDidMount() {
     const {page, cardsInPage} = this.state
-    this.setState({page: page + 1, cardsInPage: await loadCards(page)})
+    this.setState({cardsInPage: await loadCards(page)})
   }
 
   handleNextPage = async () => {
     const {page} = this.state
-    this.setState({page: page + 1, cardsInPage: await loadCards(page)})
+    const buttonNext = document.querySelector(".nextPage")
+    const buttonPrevious = document.querySelector(".previousPage")
+
+    buttonNext.setAttribute('disabled', '')
+    buttonPrevious.setAttribute('disabled', '')
+
+    this.setState({page: page + 1, cardsInPage: await loadCards(page+1)})
+
+    setTimeout(() => {
+      buttonNext.removeAttribute('disabled', '')
+      buttonPrevious.removeAttribute('disabled', '')
+    }, 2000);
+  }
+
+  handlePreviousPage = async () => {
+    const {page} = this.state
+    const buttonNext = document.querySelector(".nextPage")
+    const buttonPrevious = document.querySelector(".previousPage")
+
+    buttonNext.setAttribute('disabled', '')
+    buttonPrevious.setAttribute('disabled', '')
+
+    this.setState({page: page - 1, cardsInPage: await loadCards(page-1)})
+
+    setTimeout(() => {
+      buttonNext.removeAttribute('disabled', '')
+      buttonPrevious.removeAttribute('disabled', '')
+    }, 2000);
   }
 
   render() {
-    const {cardsInPage} = this.state
+    const {cardsInPage, page} = this.state
 
     return (
       <div className="home">
@@ -32,6 +59,11 @@ class Home extends Component {
           <div className="input-wrapper">
             <input type="text" placeholder='Search' />
           </div>
+          <div className="button-wrapper">
+          <button onClick={this.handlePreviousPage} className="previousPage">{'<- Previous Page'}</button>
+          <button onClick={this.handleNextPage} className="nextPage">Next Page -></button>
+          <p>Page: {page}</p>
+          </div>
           <div className="cards-wrapper">
             {
               cardsInPage.map((card, index) =>
@@ -42,7 +74,6 @@ class Home extends Component {
                 />
               )
             }
-            <button onClick={this.handleNextPage}>Next Page -></button>
           </div>
         </main>
       </div>
