@@ -1,18 +1,54 @@
-import { useEffect } from 'react'
+import { Component, useEffect, useState } from 'react'
 import "./styles.css"
 
-const CardPage = () => {
+import loadSingleCard from '../../utils/loadSingleCard'
 
-  useEffect(() => {
+class CardPage extends Component {
+  state = {
+    card: {}
+  }
+
+  async componentDidMount() {
+    const {card} = this.state
+
     const url = document.URL
-    console.log(url)
-  })
+    var name = []
 
-  return (
-    <div className="cardPage">
-      <h1>Oi</h1>
-    </div>
-  )
+    for(let i=url.length; i>=0; i--) {
+      if(url[i] === '/') {
+        break
+      }
+      if(url[i] != undefined) {
+        name.push(url[i])
+      }
+    }
+    name = name.reverse()  
+    name = name.toString()
+
+    for(let i=0; i<name.length; i++) {
+      if(name[i] === ",") {
+        name = name.replace(',', '')
+      }
+    }
+
+    this.setState({card: await loadSingleCard(name)})
+  }
+
+  componentDidUpdate() {
+    const {card} = this.state
+
+    console.log(card)
+  }
+
+  render() {
+    const {card} = this.state
+
+    return (
+      <div className="cardPage">
+        <img src={card.imageUrl} alt="" />
+      </div>
+    )
+  }
 }
 
 export default CardPage
