@@ -60,9 +60,9 @@ class Home extends Component {
             <input type="text" placeholder='Search' />
           </div>
           <div className="button-wrapper">
-          <button onClick={this.handlePreviousPage} className="previousPage">{'<- Previous Page'}</button>
-          <button onClick={this.handleNextPage} className="nextPage">Next Page -></button>
-          <p>Page: {page}</p>
+            <button onClick={this.handlePreviousPage} className="previousPage">{'<- Previous Page'}</button>
+            <button onClick={this.handleNextPage} className="nextPage">Next Page -></button>
+            <p>Page: {page}</p>
           </div>
           <div className="cards-wrapper">
             {
