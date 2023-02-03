@@ -23,7 +23,7 @@ class CardPage extends Component {
       }
     }
     name = name.reverse()  
-    name = name.toString()
+    name = name.join()
 
     for(let i=0; i<name.length; i++) {
       if(name[i] === ",") {
@@ -36,8 +36,6 @@ class CardPage extends Component {
 
   componentDidUpdate() {
     const {card} = this.state
-
-    console.log(card)
   }
 
   render() {
@@ -46,6 +44,11 @@ class CardPage extends Component {
     return (
       <div className="cardPage">
         <img src={card.imageUrl} alt="" />
+        <p>{card.text}</p>
+        <p><b>Colors:</b> {card.colors}</p>
+        <p><b>Artist:</b> {card.artist}</p>
+        <p><b>Available Formats:</b> {card.formats}</p>
+        <p><b>Set Name:</b> {card.setName}</p>
       </div>
     )
   }
